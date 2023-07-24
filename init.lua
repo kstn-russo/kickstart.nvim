@@ -41,6 +41,8 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+require('custom.mappings')
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -122,9 +124,16 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
+        local git_actions = require('gitsigns.actions')
+        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
+          { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
         vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
         vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
+        vim.keymap.set("n", "<leader>gr", git_actions.reset_hunk, { desc = "Git [R]eset [H]unk" })
+        vim.keymap.set("n", "<leader>gs", git_actions.stage_hunk, { desc = "Git [S]tage [H]unk" })
+        vim.keymap.set("n", "<leader>gR", git_actions.reset_buffer, { desc = "Git [R]eset Buffer" })
+        vim.keymap.set("n", "<leader>gS", git_actions.stage_buffer, { desc = "Git [S]tage Buffer" })
+        vim.keymap.set("n", "<leader>gd", git_actions.diffthis, { desc = "Git [D]iff" })
       end,
     },
   },
@@ -203,7 +212,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -438,6 +447,9 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+
+  psalm = {},
+  intelephense = {},
 }
 
 -- Setup neovim lua configuration
