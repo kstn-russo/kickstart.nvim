@@ -7,7 +7,7 @@ return {
     "mbbill/undotree",
     event = "VeryLazy",
     config = function()
-      vim.keymap.set("n", "<C-u>", vim.cmd.UndotreeToggle)
+      vim.keymap.set("n", "<leader>ut", vim.cmd.UndotreeToggle, { desc = "[U]ndo [T]ree" })
     end
   },
   {
@@ -28,22 +28,26 @@ return {
     end
   },
   {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {} -- this is equalent to setup({}) function
-  },
-  {
-    'shaunsingh/nord.nvim',
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
     config = function()
-      vim.g.nord_contrast = true
-      vim.g.nord_borders = false
-      vim.g.nord_disable_background = false
-      vim.g.nord_italic = false
-      vim.g.nord_uniform_diff_background = true
-      vim.g.nord_bold = false
-
-      -- Load the colorscheme
-      require('nord').set()
+      vim.cmd[[colorscheme tokyonight]]
     end
   }
+  -- {
+  --   'shaunsingh/nord.nvim',
+  --   config = function()
+  --     vim.g.nord_contrast = true
+  --     vim.g.nord_borders = false
+  --     vim.g.nord_disable_background = false
+  --     vim.g.nord_italic = false
+  --     vim.g.nord_uniform_diff_background = true
+  --     vim.g.nord_bold = false
+  --
+  --     -- Load the colorscheme
+  --     require('nord').set()
+  --   end
+  -- },
 }
