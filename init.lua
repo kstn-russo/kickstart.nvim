@@ -271,6 +271,13 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+    layout_strategy = "vertical",
+    layout_config = {
+      height = 0.95,
+      width = 0.95,
+      preview_cutoff = 0,
+      -- preview_height = 0.65,
+    }
   },
 }
 
@@ -364,7 +371,7 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>fdm', vim.diagnostic.open_float, { desc = 'Open [F]loating [D]iagnostic [M]essage' })
+vim.keymap.set('n', '<leader>fm', vim.diagnostic.open_float, { desc = 'Open [F]loating Diagnostic [M]essage' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Configure LSP ]]
@@ -396,7 +403,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<C-S-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -437,7 +444,12 @@ local servers = {
   },
 
   psalm = {},
-  intelephense = {},
+  phpactor = {
+    ["language_server_psalm.enabled"] = true,
+    ["language_server_psalm.bin"] = "/home/kr/.config/composer/vendor/bin/psalm",
+    ["language_server_psalm.show_info"] = true,
+    ["language_server_psalm.error_level"] = 1,
+  },
   dockerls = {},
   docker_compose_language_service = {},
   pyright = {},
@@ -491,24 +503,6 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
   },
   sources = {
     { name = 'nvim_lsp' },

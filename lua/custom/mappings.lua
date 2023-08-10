@@ -14,7 +14,7 @@ vim.keymap.set(
 
 vim.keymap.set("n", "<leader>sG", global_grep, { desc = "Search by [G]rep Global" });
 vim.keymap.set("n", "<leader>x", vim.cmd.bd, { desc = "Close buffer and delete it from buffer list" });
-vim.keymap.set("n", "<leader>fm", vim.cmd.Format, { desc = "[F]or[M]at the current buffer" });
+vim.keymap.set("n", "<leader>fo", vim.cmd.Format, { desc = "[FO]rmat the current buffer" });
 
 -- go to  beginning and end
 vim.keymap.set("i", "<C-b>", "<ESC>^i", { desc = "Beginning of line" })

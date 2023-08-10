@@ -49,7 +49,7 @@ return {
         --   normal = { c = { fg = colors.fg, bg = colors.bg } },
         --   inactive = { c = { fg = colors.fg, bg = colors.bg } },
         -- },
-        theme = 'tokyonight',
+        theme = 'nord',
       },
       sections = {
         -- these are to remove the defaults
