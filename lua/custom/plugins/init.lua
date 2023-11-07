@@ -2,4 +2,13 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+return {
+  {
+    "metalelf0/jellybeans-nvim",
+    dependencies = {
+      "rktjmp/lush.nvim",
+    },
+    lazy     = false,
+    priority = 1000,
+  },
+}
